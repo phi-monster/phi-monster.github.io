@@ -1,25 +1,41 @@
 ---
+import FighterSprite from './FighterSprite.astro';
+import type { PoseName } from '../data/sprites';
+
 export interface Props {
   name: string;
   codename?: string;
   role?: string;
   stats?: Record<string, number>;
-  glyph?: string;
+  pose?: PoseName;
   accent?: 'brick' | 'gold' | 'teal' | 'sienna';
+  facingLeft?: boolean;
 }
+
 const {
   name,
   codename,
   role,
   stats = { POW: 7, TEC: 6, SPD: 5, DEF: 4 },
-  glyph = '?',
+  pose = 'stance',
   accent = 'brick',
+  facingLeft = false,
 } = Astro.props;
+
+// Map accent name → CSS color hex (mirrors palette in global.css)
+const accentHex: Record<string, string> = {
+  brick: '#b8412c',
+  gold:  '#c9963a',
+  teal:  '#3d6b75',
+  sienna: '#8a4f31',
+};
+const ink = '#2a1f1a';
 ---
 <article class={`card accent-${accent}`} tabindex="0">
   <div class="card-portrait">
-    <div class="portrait-grid">
-      <span class="glyph">{glyph}</span>
+    <div class="portrait-bg"></div>
+    <div class="portrait-sprite">
+      <FighterSprite pose={pose} accent={accentHex[accent]} ink={ink} facingLeft={facingLeft} />
     </div>
     <div class="codename">{codename ?? '???'}</div>
   </div>
@@ -69,24 +85,36 @@ const {
     position: relative;
     aspect-ratio: 1 / 1;
     overflow: hidden;
-    background:
-      repeating-linear-gradient(45deg,
-        var(--bg-card-2) 0 12px,
-        var(--bg-card) 12px 24px);
     border-bottom: 3px solid var(--ink);
   }
-  .portrait-grid {
+  /* Painted backdrop behind the sprite (sunset gradient + diagonal stripes) */
+  .portrait-bg {
     position: absolute;
     inset: 0;
-    display: grid;
-    place-items: center;
+    background:
+      linear-gradient(180deg,
+        var(--accent-color) 0%,
+        color-mix(in srgb, var(--accent-color) 65%, var(--ink)) 100%),
+      var(--bg-card-2);
+    background-blend-mode: normal;
+    opacity: 0.85;
   }
-  .glyph {
-    font-family: var(--font-pixel);
-    font-size: clamp(48px, 9vw, 96px);
-    color: var(--ink);
-    text-shadow:
-      3px 3px 0 var(--accent-color);
+  .portrait-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      135deg,
+      transparent 0 10px,
+      rgba(255,255,255,0.08) 10px 12px
+    );
+  }
+  .portrait-sprite {
+    position: absolute;
+    inset: 6% 12% 6% 12%;
+    display: grid;
+    place-items: end center;
+    z-index: 2;
   }
   .codename {
     position: absolute;
@@ -99,6 +127,7 @@ const {
     padding: 4px 6px;
     border: 1px solid var(--ink);
     letter-spacing: 1px;
+    z-index: 3;
   }
 
   .card-body {

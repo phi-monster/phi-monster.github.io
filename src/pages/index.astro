@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Marquee from '../components/Marquee.astro';
 import FighterCard from '../components/FighterCard.astro';
+import FighterSprite from '../components/FighterSprite.astro';
 import StatusBar from '../components/StatusBar.astro';
 
 const fighters = [
@@ -9,7 +10,7 @@ const fighters = [
     name: 'ADVERSARIAL  VLA',
     codename: 'ROUND·01',
     role: 'robustness of vision-language-action systems under live adversaries',
-    glyph: 'α',
+    pose: 'guard' as const,
     accent: 'brick' as const,
     stats: { ROBUST: 6, INTERP: 7, SCALE: 8, ADV: 9 },
   },
@@ -17,7 +18,7 @@ const fighters = [
     name: 'CONTESTED  WORLD',
     codename: 'ROUND·02',
     role: 'world models when an opponent shapes the dynamics',
-    glyph: 'β',
+    pose: 'spread' as const,
     accent: 'gold' as const,
     stats: { ROBUST: 7, INTERP: 6, SCALE: 7, ADV: 9 },
   },
@@ -25,7 +26,7 @@ const fighters = [
     name: 'SELF-PLAY  CIRCUITS',
     codename: 'ROUND·03',
     role: 'mechanistic interpretability of self-play policies',
-    glyph: 'γ',
+    pose: 'stance' as const,
     accent: 'teal' as const,
     stats: { ROBUST: 5, INTERP: 10, SCALE: 6, ADV: 7 },
   },
@@ -33,7 +34,7 @@ const fighters = [
     name: 'ENERGY-BOUNDED',
     codename: 'ROUND·04',
     role: 'strategic emergence under hard physical constraints',
-    glyph: 'δ',
+    pose: 'crouch' as const,
     accent: 'sienna' as const,
     stats: { ROBUST: 8, INTERP: 7, SCALE: 5, ADV: 8 },
   },
@@ -41,7 +42,7 @@ const fighters = [
     name: 'SAMPLE-EFFICIENT',
     codename: 'ROUND·05',
     role: 'opponent-distribution coverage without league-scale compute',
-    glyph: 'ε',
+    pose: 'charge' as const,
     accent: 'brick' as const,
     stats: { ROBUST: 7, INTERP: 5, SCALE: 9, ADV: 7 },
   },
@@ -49,9 +50,30 @@ const fighters = [
     name: 'CROSS-EMBODIMENT',
     codename: 'ROUND·06',
     role: 'adversarial generalization across body morphologies',
-    glyph: 'ζ',
+    pose: 'uppercut' as const,
     accent: 'teal' as const,
     stats: { ROBUST: 9, INTERP: 6, SCALE: 7, ADV: 6 },
+  },
+];
+
+const team = [
+  {
+    name: 'LIU  YUCHEN',
+    handle: 'liu.yuchen',
+    role: 'FOUNDER · researcher',
+    affiliation: 'HKUST · undergraduate',
+    bio: 'Started Φ in 2026. Working on world models under adversarial dynamics and the mechanistic interpretability of self-play policies.',
+    pose: 'stance' as const,
+    accent: 'brick' as const,
+  },
+  {
+    name: 'CHALLENGER  · 02',
+    handle: '???',
+    role: 'co-founder · pending',
+    affiliation: 'HKUST',
+    bio: 'Recruiting. If you are doing serious research in physical-world AI fighting and want a long-term home for it, the slot is open.',
+    pose: 'guard' as const,
+    accent: 'gold' as const,
   },
 ];
 
@@ -61,6 +83,27 @@ const notRules = [
   ['NOT', 'a credential — Φ work makes a Φ researcher, not the badge'],
   ['NOT', 'a brand for status'],
   ['NOT', 'a robotics fighting league — the fight is inside the AI'],
+];
+
+const news = [
+  {
+    date: '2026 · 05',
+    tag: 'STAGE 0',
+    title: 'Φ founded · domain online · first grant applications submitted',
+    venue: '—',
+  },
+  {
+    date: '2026 · Q4',
+    tag: 'EXPECTED',
+    title: 'first preprints · ICLR 2027 submissions',
+    venue: 'arXiv',
+  },
+  {
+    date: '2027+',
+    tag: 'PIPELINE',
+    title: 'sustained publication output across ICLR / NeurIPS / ICML / CoRL / RSS',
+    venue: 'open access',
+  },
 ];
 ---
 
@@ -87,7 +130,7 @@ const notRules = [
         <span class="block-tag">ROUND  01</span>
         <h2 class="block-title">WHAT  IS  Φ ?</h2>
       </header>
-      <div class="block-body about-body">
+      <div class="about-body">
         <p class="lead">
           <strong>Φ</strong> is an independent research collective for
           <strong>physical-world AI fighting</strong>. The symbol is Φ. We
@@ -118,7 +161,7 @@ const notRules = [
       </div>
     </section>
 
-    <!-- ROUND 2: FIGHTERS / RESEARCH -->
+    <!-- ROUND 2: RESEARCH VECTORS / FIGHTERS -->
     <section class="block" id="fighters">
       <header class="block-header">
         <span class="block-tag">ROUND  02</span>
@@ -130,10 +173,62 @@ const notRules = [
       </div>
     </section>
 
-    <!-- ROUND 3: WHY -->
-    <section class="block" id="why">
+    <!-- ROUND 3: TEAM / PEOPLE -->
+    <section class="block" id="team">
       <header class="block-header">
         <span class="block-tag">ROUND  03</span>
+        <h2 class="block-title">FIGHTERS</h2>
+        <p class="block-sub">the people who do the work</p>
+      </header>
+      <div class="team-grid">
+        {team.map((p, i) => (
+          <article class={`person accent-${p.accent}`}>
+            <div class="person-portrait">
+              <div class="portrait-bg"></div>
+              <FighterSprite pose={p.pose} accent={p.accent === 'brick' ? '#b8412c' : p.accent === 'gold' ? '#c9963a' : p.accent === 'teal' ? '#3d6b75' : '#8a4f31'} ink="#2a1f1a" facingLeft={i % 2 === 1} />
+            </div>
+            <div class="person-info">
+              <span class="person-tag">PLAYER · {String(i + 1).padStart(2, '0')}</span>
+              <h3 class="person-name">{p.name}</h3>
+              <p class="person-role">{p.role}</p>
+              <p class="person-aff">{p.affiliation}</p>
+              <p class="person-bio">{p.bio}</p>
+              <div class="person-handle">@{p.handle}</div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- ROUND 4: PUBLICATIONS / NEWS -->
+    <section class="block" id="publications">
+      <header class="block-header">
+        <span class="block-tag">ROUND  04</span>
+        <h2 class="block-title">FIGHT  RECORD</h2>
+        <p class="block-sub">publications &amp; status updates · open access by default</p>
+      </header>
+      <ol class="news-list">
+        {news.map((n) => (
+          <li class="news-item">
+            <span class="news-date">{n.date}</span>
+            <span class="news-tag">{n.tag}</span>
+            <span class="news-title">{n.title}</span>
+            <span class="news-venue">{n.venue}</span>
+          </li>
+        ))}
+      </ol>
+      <p class="news-note">
+        No preprints yet. First arXiv submissions expected late 2026 /
+        early 2027. All Φ-affiliated work appears under open licenses
+        with reproducible code, on arXiv and at appropriate venues
+        (ICLR, NeurIPS, ICML, CoRL, RSS, and their workshops).
+      </p>
+    </section>
+
+    <!-- ROUND 5: WHY THIS REGIME -->
+    <section class="block" id="why">
+      <header class="block-header">
+        <span class="block-tag">ROUND  05</span>
         <h2 class="block-title">WHY  THIS  REGIME</h2>
       </header>
       <div class="why-body">
@@ -164,10 +259,10 @@ const notRules = [
       </div>
     </section>
 
-    <!-- ROUND 4: WHAT WE ARE NOT -->
+    <!-- ROUND 6: WHAT WE ARE NOT -->
     <section class="block" id="manifesto">
       <header class="block-header">
-        <span class="block-tag">ROUND  04</span>
+        <span class="block-tag">ROUND  06</span>
         <h2 class="block-title">WHAT  WE  ARE  NOT</h2>
       </header>
       <ol class="manifesto">
@@ -373,6 +468,168 @@ const notRules = [
     gap: 22px;
   }
 
+  /* ─── Team / People ─── */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 22px;
+  }
+  .person {
+    display: grid;
+    grid-template-columns: 130px 1fr;
+    gap: 16px;
+    background: var(--bg-card);
+    border: 3px solid var(--ink);
+    box-shadow: 5px 5px 0 var(--shadow);
+    transition: transform 120ms ease, box-shadow 120ms ease;
+  }
+  .person:hover {
+    transform: translate(-3px, -3px);
+    box-shadow: 8px 8px 0 var(--shadow);
+  }
+  .person-portrait {
+    position: relative;
+    overflow: hidden;
+    border-right: 3px solid var(--ink);
+    aspect-ratio: 1 / 1;
+    min-height: 130px;
+  }
+  .person-portrait .portrait-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg,
+        var(--accent-color) 0%,
+        color-mix(in srgb, var(--accent-color) 60%, var(--ink)) 100%);
+    opacity: 0.9;
+  }
+  .person-portrait .portrait-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      135deg,
+      transparent 0 10px,
+      rgba(255,255,255,0.1) 10px 12px
+    );
+  }
+  .person-portrait :global(.fighter-sprite) {
+    position: absolute;
+    inset: 8% 12% 0 12%;
+    width: auto;
+    height: 92%;
+    margin: auto;
+    z-index: 2;
+  }
+  .person-info {
+    padding: 14px 16px 16px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .person-tag {
+    font-family: var(--font-pixel);
+    font-size: 8px;
+    color: var(--accent-color);
+    letter-spacing: 2px;
+  }
+  .person-name {
+    font-family: var(--font-pixel);
+    font-size: 14px;
+    color: var(--ink);
+    letter-spacing: 1px;
+    margin-top: 2px;
+  }
+  .person-role {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink-dim);
+  }
+  .person-aff {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+  .person-bio {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-top: 6px;
+  }
+  .person-handle {
+    font-family: var(--font-pixel);
+    font-size: 8px;
+    color: var(--accent-color);
+    margin-top: auto;
+    padding-top: 8px;
+    letter-spacing: 1px;
+  }
+  .accent-brick  { --accent-color: var(--brick); }
+  .accent-gold   { --accent-color: var(--gold); }
+  .accent-teal   { --accent-color: var(--teal); }
+  .accent-sienna { --accent-color: var(--sienna); }
+
+  /* ─── News / Publications ─── */
+  .news-list {
+    list-style: none;
+    display: grid;
+    gap: 0;
+    border: 1px solid var(--paper-line);
+    background: var(--bg-card);
+  }
+  .news-item {
+    display: grid;
+    grid-template-columns: 90px 80px 1fr 90px;
+    gap: 16px;
+    padding: 14px 18px;
+    border-bottom: 1px dashed var(--paper-line);
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--ink);
+    align-items: baseline;
+  }
+  .news-item:last-child { border-bottom: 0; }
+  .news-date {
+    font-family: var(--font-pixel);
+    font-size: 9px;
+    color: var(--teal);
+    letter-spacing: 1px;
+  }
+  .news-tag {
+    font-family: var(--font-pixel);
+    font-size: 8px;
+    color: var(--cream);
+    background: var(--brick);
+    padding: 4px 6px;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+  .news-venue {
+    font-family: var(--font-pixel);
+    font-size: 8px;
+    color: var(--ink-soft);
+    letter-spacing: 1px;
+    text-align: right;
+  }
+  .news-note {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    color: var(--ink-dim);
+    line-height: 1.6;
+    margin-top: 16px;
+    padding: 14px 18px;
+    background: var(--bg-card-2);
+    border-left: 4px solid var(--gold);
+  }
+  @media (max-width: 720px) {
+    .news-item {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    .news-venue { text-align: left; }
+  }
+
   /* ─── Manifesto / Not list ─── */
   .manifesto {
     list-style: none;
@@ -420,7 +677,7 @@ const notRules = [
     box-shadow: 5px 5px 0 var(--shadow);
     transition: transform 120ms ease, box-shadow 120ms ease;
     color: var(--ink);
-    border-bottom: 3px solid var(--ink); /* override link underline */
+    border-bottom: 3px solid var(--ink);
   }
   a.contact-card { border-bottom: 3px solid var(--ink); }
   a.contact-card:hover {

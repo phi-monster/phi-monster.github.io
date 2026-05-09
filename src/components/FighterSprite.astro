@@ -1,0 +1,87 @@
+---
+import { POSES, type PoseName } from '../data/sprites';
+
+export interface Props {
+  pose?: PoseName;
+  accent?: string;       // CSS color (body fill)
+  ink?: string;          // CSS color (outline + shadow)
+  facingLeft?: boolean;
+}
+
+const {
+  pose = 'stance',
+  accent = '#b8412c',
+  ink = '#2a1f1a',
+  facingLeft = false,
+} = Astro.props;
+
+const pattern = POSES[pose];
+const cols = pattern[0]!.length;
+const rows = pattern.length;
+
+// Build a list of body cells.
+type Cell = { r: number; c: number };
+const cells: Cell[] = [];
+for (let r = 0; r < rows; r++) {
+  for (let c = 0; c < cols; c++) {
+    if (pattern[r]![c] === 'X') cells.push({ r, c });
+  }
+}
+
+// Outline = body cells offset by ±1 in 8 directions. Renders an ink
+// pixel under each body pixel's exposed edge.
+const outlineOffsets: [number, number][] = [
+  [-1, 0], [1, 0], [0, -1], [0, 1],
+  [-1, -1], [1, -1], [-1, 1], [1, 1],
+];
+
+// SVG viewBox includes a 1-px outline margin.
+const vbW = cols + 2;
+const vbH = rows + 2;
+
+// Optional flip via transform on the inner group.
+const groupTransform = facingLeft
+  ? `translate(${vbW}, 1) scale(-1, 1)`
+  : `translate(1, 1)`;
+---
+<svg
+  class="fighter-sprite"
+  viewBox={`0 0 ${vbW} ${vbH}`}
+  preserveAspectRatio="xMidYMid meet"
+  shape-rendering="crispEdges"
+  aria-hidden="true"
+>
+  <g transform={groupTransform}>
+    {/* Ground shadow (oval beneath feet) */}
+    <ellipse cx={cols / 2} cy={rows + 0.4} rx={cols * 0.42} ry={0.5} fill={ink} opacity="0.5" />
+
+    {/* Outline pass — ink rects offset */}
+    {outlineOffsets.map(([dr, dc]) =>
+      cells.map((cell) => (
+        <rect x={cell.c + dc} y={cell.r + dr} width={1} height={1} fill={ink} />
+      ))
+    )}
+
+    {/* Body fill */}
+    {cells.map((cell) => (
+      <rect x={cell.c} y={cell.r} width={1} height={1} fill={accent} />
+    ))}
+
+    {/* Subtle inner highlight on the upper-left of head + torso */}
+    {cells
+      .filter((cell) => cell.r < rows * 0.45 && cell.c < cols * 0.45)
+      .map((cell) => (
+        <rect x={cell.c} y={cell.r} width={1} height={0.4} fill="white" opacity="0.18" />
+      ))}
+  </g>
+</svg>
+
+<style>
+  .fighter-sprite {
+    width: 100%;
+    height: 100%;
+    display: block;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+</style>

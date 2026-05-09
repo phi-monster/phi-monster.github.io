@@ -24,18 +24,22 @@ export async function bootArcade(parentId: string) {
     roundPixels: true,
     fps: { target: 60, forceSetTimeOut: false },
     scene: [TitleScene],
-    audio: { disableWebAudio: false, noAudio: true }, // we synthesize manually
+    audio: { disableWebAudio: false, noAudio: true },
     banner: false,
   });
 
-  // When the title screen advances, scroll into the main content.
-  document.addEventListener('phi:start', () => {
-    const main = document.getElementById('main-content');
-    if (main) {
-      main.classList.add('reveal');
-      main.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Pause Phaser rendering when canvas is off-screen — keeps idle CPU near zero
+  // when the user is reading content below.
+  const io = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) {
+        game.loop.wake();
+      } else {
+        game.loop.sleep();
+      }
     }
-  }, { once: true });
+  }, { threshold: 0.05 });
+  io.observe(parent);
 
   return game;
 }

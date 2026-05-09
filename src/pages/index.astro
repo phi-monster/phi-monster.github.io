@@ -75,13 +75,12 @@ const notRules = [
         <p>JavaScript is required for the arcade title screen. Continue below.</p>
       </div>
     </noscript>
-    <button id="skip-intro" type="button" aria-label="Skip intro">SKIP ▾</button>
   </section>
 
   <Marquee />
 
   <!-- MAIN CONTENT -->
-  <main id="main-content">
+  <main id="main-content" class="reveal">
     <!-- ROUND 1: ABOUT -->
     <section class="block" id="about">
       <header class="block-header">
@@ -218,23 +217,8 @@ const notRules = [
 
   bootArcade('phaser-mount');
 
-  const skipBtn = document.getElementById('skip-intro');
-  skipBtn?.addEventListener('click', () => {
-    document.dispatchEvent(new CustomEvent('phi:start'));
-  });
-
   const yr = document.getElementById('yr');
   if (yr) yr.textContent = String(new Date().getUTCFullYear());
-
-  const main = document.getElementById('main-content');
-  let revealed = false;
-  const reveal = () => {
-    if (revealed) return;
-    revealed = true;
-    main?.classList.add('reveal');
-  };
-  window.addEventListener('scroll', reveal, { passive: true, once: true });
-  document.addEventListener('phi:start', reveal);
 </script>
 
 <style>
@@ -251,25 +235,6 @@ const notRules = [
     display: block;
     width: 100% !important;
     height: 100% !important;
-  }
-  #skip-intro {
-    position: absolute;
-    bottom: 22px;
-    right: 22px;
-    background: transparent;
-    border: 2px solid var(--ink-dim);
-    color: var(--ink-dim);
-    font-family: var(--font-pixel);
-    font-size: 9px;
-    letter-spacing: 2px;
-    padding: 8px 12px;
-    box-shadow: 3px 3px 0 var(--shadow);
-    z-index: 5;
-  }
-  #skip-intro:hover {
-    color: var(--gold);
-    border-color: var(--gold);
-    background: transparent;
   }
   .noscript-card {
     position: absolute;
@@ -289,14 +254,10 @@ const notRules = [
     margin-bottom: 16px;
   }
 
-  /* ─── Main reveal ─── */
+  /* ─── Main content ─── */
   #main-content {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 700ms ease, transform 700ms ease;
     padding-bottom: 80px;
   }
-  #main-content.reveal { opacity: 1; transform: translateY(0); }
 
   /* ─── Block / section base ─── */
   .block {

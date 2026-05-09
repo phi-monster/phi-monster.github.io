@@ -26,6 +26,17 @@ export async function bootArcade(parentId: string) {
     scene: [TitleScene],
     audio: { disableWebAudio: false, noAudio: true },
     banner: false,
+    // Don't capture mouse/touch/keyboard — title screen is decorative,
+    // events must reach the page so the user can scroll naturally.
+    input: {
+      mouse: false,
+      touch: false,
+      keyboard: false,
+      gamepad: false,
+      activePointers: 0,
+      windowEvents: false,
+    },
+    disableContextMenu: false,
   });
 
   // Pause Phaser rendering when canvas is off-screen — keeps idle CPU near zero

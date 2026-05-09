@@ -230,11 +230,17 @@ const notRules = [
     width: 100%;
     overflow: hidden;
   }
-  #phaser-mount { position: absolute; inset: 0; }
+  #phaser-mount {
+    position: absolute;
+    inset: 0;
+    /* Decorative — let wheel/touch scroll pass through to the page */
+    pointer-events: none;
+  }
   #phaser-mount canvas {
     display: block;
     width: 100% !important;
     height: 100% !important;
+    pointer-events: none;
   }
   .noscript-card {
     position: absolute;

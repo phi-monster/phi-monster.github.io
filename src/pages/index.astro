@@ -10,7 +10,7 @@ const fighters = [
     codename: 'ROUND·01',
     role: 'robustness of vision-language-action systems under live adversaries',
     glyph: 'α',
-    accent: 'hot' as const,
+    accent: 'brick' as const,
     stats: { ROBUST: 6, INTERP: 7, SCALE: 8, ADV: 9 },
   },
   {
@@ -26,7 +26,7 @@ const fighters = [
     codename: 'ROUND·03',
     role: 'mechanistic interpretability of self-play policies',
     glyph: 'γ',
-    accent: 'neon' as const,
+    accent: 'teal' as const,
     stats: { ROBUST: 5, INTERP: 10, SCALE: 6, ADV: 7 },
   },
   {
@@ -34,7 +34,7 @@ const fighters = [
     codename: 'ROUND·04',
     role: 'strategic emergence under hard physical constraints',
     glyph: 'δ',
-    accent: 'acid' as const,
+    accent: 'sienna' as const,
     stats: { ROBUST: 8, INTERP: 7, SCALE: 5, ADV: 8 },
   },
   {
@@ -42,7 +42,7 @@ const fighters = [
     codename: 'ROUND·05',
     role: 'opponent-distribution coverage without league-scale compute',
     glyph: 'ε',
-    accent: 'blood' as const,
+    accent: 'brick' as const,
     stats: { ROBUST: 7, INTERP: 5, SCALE: 9, ADV: 7 },
   },
   {
@@ -50,7 +50,7 @@ const fighters = [
     codename: 'ROUND·06',
     role: 'adversarial generalization across body morphologies',
     glyph: 'ζ',
-    accent: 'hot' as const,
+    accent: 'teal' as const,
     stats: { ROBUST: 9, INTERP: 6, SCALE: 7, ADV: 6 },
   },
 ];
@@ -80,7 +80,7 @@ const notRules = [
   <Marquee />
 
   <!-- MAIN CONTENT -->
-  <main id="main-content" class="reveal">
+  <main id="main-content">
     <!-- ROUND 1: ABOUT -->
     <section class="block" id="about">
       <header class="block-header">
@@ -226,14 +226,14 @@ const notRules = [
   #arcade-stage {
     position: relative;
     height: 100vh;
-    min-height: 560px;
+    min-height: 600px;
     width: 100%;
     overflow: hidden;
+    background: var(--bg-hero-0);
   }
   #phaser-mount {
     position: absolute;
     inset: 0;
-    /* Decorative — let wheel/touch scroll pass through to the page */
     pointer-events: none;
   }
   #phaser-mount canvas {
@@ -248,7 +248,7 @@ const notRules = [
     display: grid;
     place-content: center;
     text-align: center;
-    background: var(--bg-1);
+    background: var(--bg-card);
     border: 3px solid var(--ink);
     padding: 32px;
     z-index: 2;
@@ -256,13 +256,14 @@ const notRules = [
   .noscript-card h1 {
     font-family: var(--font-pixel);
     font-size: 32px;
-    color: var(--gold);
+    color: var(--brick);
     margin-bottom: 16px;
   }
 
   /* ─── Main content ─── */
   #main-content {
     padding-bottom: 80px;
+    background: var(--bg-page);
   }
 
   /* ─── Block / section base ─── */
@@ -276,13 +277,13 @@ const notRules = [
     flex-direction: column;
     gap: 8px;
     margin-bottom: 32px;
-    border-left: 6px solid var(--hot);
+    border-left: 6px solid var(--brick);
     padding-left: 16px;
   }
   .block-tag {
     font-family: var(--font-pixel);
     font-size: 10px;
-    color: var(--gold);
+    color: var(--sienna);
     letter-spacing: 3px;
   }
   .block-title {
@@ -290,7 +291,6 @@ const notRules = [
     font-size: clamp(20px, 3.6vw, 32px);
     color: var(--ink);
     letter-spacing: 2px;
-    text-shadow: 3px 3px 0 var(--shadow);
   }
   .block-sub {
     font-family: var(--font-mono);
@@ -303,24 +303,24 @@ const notRules = [
   .lead {
     font-family: var(--font-mono);
     font-size: clamp(16px, 2.2vw, 20px);
-    line-height: 1.55;
+    line-height: 1.6;
     color: var(--ink);
   }
-  .lead strong { color: var(--gold); }
-  .lead em { color: var(--hot); font-style: normal; }
+  .lead strong { color: var(--brick); font-weight: 700; }
+  .lead em { color: var(--sienna); font-style: italic; }
   .about-body p {
-    font-size: 15px;
-    line-height: 1.65;
+    font-size: 16px;
+    line-height: 1.7;
     color: var(--ink-dim);
   }
-  .about-body p em { color: var(--hot); font-style: italic; }
+  .about-body p em { color: var(--brick); font-style: italic; }
   .hud-list {
     list-style: none;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 8px;
     margin-top: 12px;
-    border-top: 2px dashed var(--bg-2);
+    border-top: 1px dashed var(--paper-line);
     padding-top: 16px;
   }
   .hud-list li {
@@ -331,9 +331,9 @@ const notRules = [
     font-size: 9px;
     letter-spacing: 1px;
     line-height: 1.6;
-    color: var(--ink-dim);
+    color: var(--ink);
   }
-  .hud-key { color: var(--neon); }
+  .hud-key { color: var(--teal); }
 
   /* ─── Why ─── */
   .why-body {
@@ -341,16 +341,17 @@ const notRules = [
     gap: 18px;
     font-family: var(--font-mono);
     font-size: 16px;
-    line-height: 1.65;
+    line-height: 1.7;
     color: var(--ink-dim);
   }
-  .why-body em { color: var(--hot); font-style: italic; }
+  .why-body em { color: var(--brick); font-style: italic; }
   .why-list {
     list-style: none;
     display: grid;
     gap: 8px;
-    padding: 16px 18px;
-    background: var(--bg-1);
+    padding: 18px 22px;
+    background: var(--bg-card);
+    border: 1px solid var(--paper-line);
     border-left: 4px solid var(--gold);
   }
   .why-list li {
@@ -362,7 +363,7 @@ const notRules = [
     content: '▸';
     position: absolute;
     left: 0;
-    color: var(--hot);
+    color: var(--brick);
   }
 
   /* ─── Fighters grid ─── */
@@ -383,8 +384,9 @@ const notRules = [
     grid-template-columns: 80px 1fr;
     gap: 18px;
     align-items: baseline;
-    background: var(--bg-1);
-    border-left: 4px solid var(--blood);
+    background: var(--bg-card);
+    border: 1px solid var(--paper-line);
+    border-left: 4px solid var(--brick);
     padding: 16px 18px;
     font-family: var(--font-mono);
     font-size: 16px;
@@ -393,13 +395,13 @@ const notRules = [
     transition: border-color 120ms ease, transform 120ms ease;
   }
   .manifesto li:hover {
-    border-color: var(--gold);
+    border-left-color: var(--gold);
     transform: translateX(4px);
   }
   .m-num {
     font-family: var(--font-pixel);
     font-size: 14px;
-    color: var(--blood);
+    color: var(--brick);
     letter-spacing: 2px;
   }
 
@@ -413,22 +415,25 @@ const notRules = [
     display: grid;
     gap: 6px;
     padding: 22px;
-    background: var(--bg-1);
+    background: var(--bg-card);
     border: 3px solid var(--ink);
     box-shadow: 5px 5px 0 var(--shadow);
     transition: transform 120ms ease, box-shadow 120ms ease;
     color: var(--ink);
+    border-bottom: 3px solid var(--ink); /* override link underline */
   }
+  a.contact-card { border-bottom: 3px solid var(--ink); }
   a.contact-card:hover {
     transform: translate(-2px, -2px);
     box-shadow: 7px 7px 0 var(--shadow);
-    color: var(--gold);
+    color: var(--brick);
+    background: var(--bg-card-2);
   }
   .cc-key {
     font-family: var(--font-pixel);
     font-size: 9px;
     letter-spacing: 2px;
-    color: var(--neon);
+    color: var(--teal);
   }
   .cc-val {
     font-family: var(--font-mono);
@@ -449,7 +454,7 @@ const notRules = [
   }
   .footer-sub {
     font-size: 8px;
-    color: var(--hot);
+    color: var(--brick);
     margin-top: 8px;
   }
 </style>

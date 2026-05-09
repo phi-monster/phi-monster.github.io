@@ -1,15 +1,11 @@
 ---
-import FighterSprite from './FighterSprite.astro';
-import type { PoseName } from '../data/sprites';
-
 export interface Props {
   name: string;
   codename?: string;
   role?: string;
   stats?: Record<string, number>;
-  pose?: PoseName;
+  image?: string;        // Path to sprite image, e.g. "/sprites/round-01.png"
   accent?: 'brick' | 'gold' | 'teal' | 'sienna';
-  facingLeft?: boolean;
 }
 
 const {
@@ -17,26 +13,22 @@ const {
   codename,
   role,
   stats = { POW: 7, TEC: 6, SPD: 5, DEF: 4 },
-  pose = 'stance',
+  image,
   accent = 'brick',
-  facingLeft = false,
 } = Astro.props;
-
-// Map accent name → CSS color hex (mirrors palette in global.css)
-const accentHex: Record<string, string> = {
-  brick: '#b8412c',
-  gold:  '#c9963a',
-  teal:  '#3d6b75',
-  sienna: '#8a4f31',
-};
-const ink = '#2a1f1a';
 ---
 <article class={`card accent-${accent}`} tabindex="0">
   <div class="card-portrait">
-    <div class="portrait-bg"></div>
-    <div class="portrait-sprite">
-      <FighterSprite pose={pose} accent={accentHex[accent]} ink={ink} facingLeft={facingLeft} />
-    </div>
+    <div class="portrait-bg" aria-hidden="true"></div>
+    {image
+      ? <img src={image} alt={name} class="portrait-img" />
+      : (
+        <div class="portrait-placeholder">
+          <span class="ph-tag">SPRITE  PENDING</span>
+          <span class="ph-hint">drop image at<br/><code>/sprites/&lt;file&gt;</code></span>
+        </div>
+      )
+    }
     <div class="codename">{codename ?? '???'}</div>
   </div>
   <div class="card-body">
@@ -87,17 +79,15 @@ const ink = '#2a1f1a';
     overflow: hidden;
     border-bottom: 3px solid var(--ink);
   }
-  /* Painted backdrop behind the sprite (sunset gradient + diagonal stripes) */
+  /* Painted accent backdrop */
   .portrait-bg {
     position: absolute;
     inset: 0;
     background:
       linear-gradient(180deg,
         var(--accent-color) 0%,
-        color-mix(in srgb, var(--accent-color) 65%, var(--ink)) 100%),
-      var(--bg-card-2);
-    background-blend-mode: normal;
-    opacity: 0.85;
+        color-mix(in srgb, var(--accent-color) 65%, var(--ink)) 100%);
+    opacity: 0.9;
   }
   .portrait-bg::after {
     content: '';
@@ -109,12 +99,46 @@ const ink = '#2a1f1a';
       rgba(255,255,255,0.08) 10px 12px
     );
   }
-  .portrait-sprite {
+  .portrait-img {
     position: absolute;
-    inset: 6% 12% 6% 12%;
-    display: grid;
-    place-items: end center;
+    inset: 6%;
+    width: 88%;
+    height: 88%;
+    object-fit: contain;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
     z-index: 2;
+  }
+  .portrait-placeholder {
+    position: absolute;
+    inset: 12% 10%;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    gap: 10px;
+    border: 2px dashed rgba(246, 236, 210, 0.55);
+    background: rgba(20, 16, 12, 0.35);
+    color: var(--cream);
+    z-index: 2;
+    padding: 10px;
+  }
+  .ph-tag {
+    font-family: var(--font-pixel);
+    font-size: 9px;
+    color: var(--cream);
+    letter-spacing: 2px;
+  }
+  .ph-hint {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--cream);
+    opacity: 0.85;
+  }
+  .ph-hint code {
+    background: rgba(0,0,0,0.4);
+    padding: 1px 4px;
+    color: var(--cream);
   }
   .codename {
     position: absolute;

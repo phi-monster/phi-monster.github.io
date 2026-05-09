@@ -11,7 +11,6 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.16.18",
-    "phaser": "^3.87.0"
+    "astro": "^4.16.18"
   }
 }

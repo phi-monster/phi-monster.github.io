@@ -1,16 +1,18 @@
 ---
 import Base from '../layouts/Base.astro';
+import HeroVS from '../components/HeroVS.astro';
 import Marquee from '../components/Marquee.astro';
 import FighterCard from '../components/FighterCard.astro';
-import FighterSprite from '../components/FighterSprite.astro';
 import StatusBar from '../components/StatusBar.astro';
 
+// Research vectors. `image` slot is a path under /public/sprites/ —
+// drop a PNG there to fill the portrait. When undefined, a "SPRITE
+// PENDING" placeholder shows.
 const fighters = [
   {
     name: 'ADVERSARIAL  VLA',
     codename: 'ROUND·01',
     role: 'robustness of vision-language-action systems under live adversaries',
-    pose: 'guard' as const,
     accent: 'brick' as const,
     stats: { ROBUST: 6, INTERP: 7, SCALE: 8, ADV: 9 },
   },
@@ -18,7 +20,6 @@ const fighters = [
     name: 'CONTESTED  WORLD',
     codename: 'ROUND·02',
     role: 'world models when an opponent shapes the dynamics',
-    pose: 'spread' as const,
     accent: 'gold' as const,
     stats: { ROBUST: 7, INTERP: 6, SCALE: 7, ADV: 9 },
   },
@@ -26,7 +27,6 @@ const fighters = [
     name: 'SELF-PLAY  CIRCUITS',
     codename: 'ROUND·03',
     role: 'mechanistic interpretability of self-play policies',
-    pose: 'stance' as const,
     accent: 'teal' as const,
     stats: { ROBUST: 5, INTERP: 10, SCALE: 6, ADV: 7 },
   },
@@ -34,7 +34,6 @@ const fighters = [
     name: 'ENERGY-BOUNDED',
     codename: 'ROUND·04',
     role: 'strategic emergence under hard physical constraints',
-    pose: 'crouch' as const,
     accent: 'sienna' as const,
     stats: { ROBUST: 8, INTERP: 7, SCALE: 5, ADV: 8 },
   },
@@ -42,7 +41,6 @@ const fighters = [
     name: 'SAMPLE-EFFICIENT',
     codename: 'ROUND·05',
     role: 'opponent-distribution coverage without league-scale compute',
-    pose: 'charge' as const,
     accent: 'brick' as const,
     stats: { ROBUST: 7, INTERP: 5, SCALE: 9, ADV: 7 },
   },
@@ -50,7 +48,6 @@ const fighters = [
     name: 'CROSS-EMBODIMENT',
     codename: 'ROUND·06',
     role: 'adversarial generalization across body morphologies',
-    pose: 'uppercut' as const,
     accent: 'teal' as const,
     stats: { ROBUST: 9, INTERP: 6, SCALE: 7, ADV: 6 },
   },
@@ -63,7 +60,6 @@ const team = [
     role: 'FOUNDER · researcher',
     affiliation: 'HKUST · undergraduate',
     bio: 'Started Φ in 2026. Working on world models under adversarial dynamics and the mechanistic interpretability of self-play policies.',
-    pose: 'stance' as const,
     accent: 'brick' as const,
   },
   {
@@ -72,7 +68,6 @@ const team = [
     role: 'co-founder · pending',
     affiliation: 'HKUST',
     bio: 'Recruiting. If you are doing serious research in physical-world AI fighting and want a long-term home for it, the slot is open.',
-    pose: 'guard' as const,
     accent: 'gold' as const,
   },
 ];
@@ -108,21 +103,10 @@ const news = [
 ---
 
 <Base>
-  <!-- ARCADE TITLE / PHASER STAGE -->
-  <section id="arcade-stage" aria-label="Title screen">
-    <div id="phaser-mount"></div>
-    <noscript>
-      <div class="noscript-card">
-        <h1>Φ MONSTER</h1>
-        <p>Independent research collective for physical-world AI fighting.</p>
-        <p>JavaScript is required for the arcade title screen. Continue below.</p>
-      </div>
-    </noscript>
-  </section>
+  <HeroVS />
 
   <Marquee />
 
-  <!-- MAIN CONTENT -->
   <main id="main-content">
     <!-- ROUND 1: ABOUT -->
     <section class="block" id="about">
@@ -161,7 +145,7 @@ const news = [
       </div>
     </section>
 
-    <!-- ROUND 2: RESEARCH VECTORS / FIGHTERS -->
+    <!-- ROUND 2: RESEARCH VECTORS -->
     <section class="block" id="fighters">
       <header class="block-header">
         <span class="block-tag">ROUND  02</span>
@@ -173,7 +157,7 @@ const news = [
       </div>
     </section>
 
-    <!-- ROUND 3: TEAM / PEOPLE -->
+    <!-- ROUND 3: TEAM -->
     <section class="block" id="team">
       <header class="block-header">
         <span class="block-tag">ROUND  03</span>
@@ -184,8 +168,10 @@ const news = [
         {team.map((p, i) => (
           <article class={`person accent-${p.accent}`}>
             <div class="person-portrait">
-              <div class="portrait-bg"></div>
-              <FighterSprite pose={p.pose} accent={p.accent === 'brick' ? '#b8412c' : p.accent === 'gold' ? '#c9963a' : p.accent === 'teal' ? '#3d6b75' : '#8a4f31'} ink="#2a1f1a" facingLeft={i % 2 === 1} />
+              <div class="portrait-bg" aria-hidden="true"></div>
+              <div class="portrait-placeholder">
+                <span class="ph-tag">PORTRAIT  PENDING</span>
+              </div>
             </div>
             <div class="person-info">
               <span class="person-tag">PLAYER · {String(i + 1).padStart(2, '0')}</span>
@@ -308,53 +294,11 @@ const news = [
 </Base>
 
 <script>
-  import { bootArcade } from '../game/boot';
-
-  bootArcade('phaser-mount');
-
   const yr = document.getElementById('yr');
   if (yr) yr.textContent = String(new Date().getUTCFullYear());
 </script>
 
 <style>
-  /* ─── Arcade stage ─── */
-  #arcade-stage {
-    position: relative;
-    height: 100vh;
-    min-height: 600px;
-    width: 100%;
-    overflow: hidden;
-    background: var(--bg-hero-0);
-  }
-  #phaser-mount {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-  }
-  #phaser-mount canvas {
-    display: block;
-    width: 100% !important;
-    height: 100% !important;
-    pointer-events: none;
-  }
-  .noscript-card {
-    position: absolute;
-    inset: 12% 8%;
-    display: grid;
-    place-content: center;
-    text-align: center;
-    background: var(--bg-card);
-    border: 3px solid var(--ink);
-    padding: 32px;
-    z-index: 2;
-  }
-  .noscript-card h1 {
-    font-family: var(--font-pixel);
-    font-size: 32px;
-    color: var(--brick);
-    margin-bottom: 16px;
-  }
-
   /* ─── Main content ─── */
   #main-content {
     padding-bottom: 80px;
@@ -494,7 +438,7 @@ const news = [
     aspect-ratio: 1 / 1;
     min-height: 130px;
   }
-  .person-portrait .portrait-bg {
+  .portrait-bg {
     position: absolute;
     inset: 0;
     background:
@@ -503,23 +447,31 @@ const news = [
         color-mix(in srgb, var(--accent-color) 60%, var(--ink)) 100%);
     opacity: 0.9;
   }
-  .person-portrait .portrait-bg::after {
+  .portrait-bg::after {
     content: '';
     position: absolute;
     inset: 0;
     background: repeating-linear-gradient(
       135deg,
       transparent 0 10px,
-      rgba(255,255,255,0.1) 10px 12px
+      rgba(255,255,255,0.08) 10px 12px
     );
   }
-  .person-portrait :global(.fighter-sprite) {
+  .portrait-placeholder {
     position: absolute;
-    inset: 8% 12% 0 12%;
-    width: auto;
-    height: 92%;
-    margin: auto;
+    inset: 14% 12%;
+    display: grid;
+    place-content: center;
+    text-align: center;
+    border: 2px dashed rgba(246, 236, 210, 0.5);
+    background: rgba(20, 16, 12, 0.3);
+    color: var(--cream);
     z-index: 2;
+  }
+  .person-portrait .ph-tag {
+    font-family: var(--font-pixel);
+    font-size: 7px;
+    letter-spacing: 1px;
   }
   .person-info {
     padding: 14px 16px 16px 0;

@@ -1,6 +1,6 @@
 # Deploy notes
 
-Source for **https://φ.monster** (`xn--n5h.monster`).
+Source for **https://φ.monster** (`xn--7xa.monster`).
 
 ## Develop
 
@@ -20,7 +20,7 @@ npm run preview
 
 GitHub Actions (`.github/workflows/deploy.yml`) auto-builds and publishes to GitHub Pages on push to `main`.
 
-The `public/CNAME` file pins the custom domain. It uses Punycode (`xn--n5h.monster`) — required for IDN domains on GitHub Pages.
+The `public/CNAME` file pins the custom domain. It uses Punycode (`xn--7xa.monster`) — required for IDN domains on GitHub Pages.
 
 ### One-time GitHub Pages setup
 

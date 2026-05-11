@@ -135,15 +135,15 @@ When the work is good enough, the rest will explain itself.
 
 ## Status
 
-Φ was founded in 2026 by Liu Yuchen, an undergraduate sophomore at the Hong Kong University of Science and Technology. The collective currently has two members, both HKUST students.
+Φ was founded in 2026 by Liu Yuchen and Han Muchen, undergraduates at the Hong Kong University of Science and Technology.
 
 We are currently very small. The first few papers under the Φ banner are in progress. We expect the first arXiv preprints to appear in late 2026 or early 2027.
 
 If you are doing serious research in physical-world AI fighting, mechanistic interpretability of physical policies, or world models under contested dynamics — and you want to talk to people who care about the same things — reach out.
 
 [contact: TODO]
-[website: TODO]
-[github: TODO]
+[website: <https://φ.monster>]
+[github: <https://github.com/phi-monster>]
 
 ---
 
@@ -290,4 +290,4 @@ Strategic-level only. Operational stack tracked separately in `INFRA.md`.
 - [x] Founder named: Liu Yuchen
 - [x] IP basis: Φ work uses zero HKUST resources; full IP ownership by Φ
 - [x] Affiliation convention for ICLR 2027 onward: Φ-only, Φ-domain email
-- [ ] Co-founder name (for Operating Agreement): TBD
+- [x] **Co-founders: Liu Yuchen (80%) + Han Muchen (20%)**

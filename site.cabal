@@ -1,0 +1,14 @@
+cabal-version:      2.2
+name:               site
+version:            0.1.0.0
+synopsis:           Personal site generator (Hakyll)
+author:             Liu Yuchen
+maintainer:         yliuoe@connect.ust.hk
+build-type:         Simple
+
+executable site
+  main-is:            site.hs
+  build-depends:      base       >= 4 && < 5,
+                      hakyll     >= 4.16
+  default-language:   Haskell2010
+  ghc-options:        -threaded -Wall -Wno-unused-imports

@@ -1,0 +1,324 @@
+/* -------------------------------------------------------------------------
+   style.css — Φ(fight) Research
+
+   Shares the linen + slate palette of lyrica.φ.monster so the founder's
+   personal site and the collective's site feel like one body of work.
+   The single visual departure is the two pixel fighters at the head of
+   the page: a tiny KOF-spirited motif that gives the slogan a physical
+   form without bleeding marketing energy into the rest of the page.
+   ------------------------------------------------------------------------- */
+
+:root {
+  --paper:     #f5f2e9;
+  --ink:       #2a2826;
+  --ink-soft:  #6b6864;
+  --rule:      #ddd9d0;
+  --link:      #1f4870;
+  --link-hov:  #a06b4a;
+  --measure:   40rem;
+}
+
+/* ---- reset --------------------------------------------------------- */
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+/* ---- typography ---------------------------------------------------- */
+
+html {
+  font-size: 18px;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: Charter, "Bitstream Charter", "Sitka Text", Cambria,
+               "Source Serif Pro", Georgia, serif;
+  font-feature-settings: "kern", "liga", "onum";
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+main {
+  max-width: var(--measure);
+  margin: 2.5rem auto 2rem;
+  padding: 0 1.5rem;
+}
+
+p { margin: 0.7em 0; }
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--link) 45%, transparent);
+  transition: color 120ms ease, border-color 120ms ease;
+}
+a:hover {
+  color: var(--link-hov);
+  border-bottom-color: currentColor;
+}
+
+code, kbd, samp, pre {
+  font-family: "JetBrains Mono", "IBM Plex Mono", "SF Mono", Menlo,
+               Consolas, monospace;
+  font-size: 0.92em;
+}
+
+/* ---- two-fighter motif --------------------------------------------- */
+
+.fighters {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 5rem;
+  margin: 0.5rem 0 2.5rem;
+  padding: 0;
+  position: relative;
+}
+
+.fighter-link {
+  /* override default link chrome — these aren't text links */
+  display: block;
+  position: relative;
+  color: var(--ink-soft);
+  border-bottom: none;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0.4rem;
+}
+
+.fighter {
+  display: block;
+  width: auto;
+  height: 130px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+  /* gentle idle bob; the two fighters' phases are offset so they breathe
+     out of sync, like two real bodies. */
+  animation: bob 1.4s ease-in-out infinite;
+  transition: transform 180ms ease;
+  transform-origin: center bottom;
+}
+
+.fighter-1 { animation-delay: 0s; }
+.fighter-2 { animation-delay: -0.7s; }
+
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-3px); }
+}
+
+/* Hover: a small "ready" lift — gloves come up a touch. */
+.fighter-link:hover .fighter {
+  animation-play-state: paused;
+  transform: translateY(-6px) scale(1.06);
+}
+
+/* Periodic "spar" — every ~8 seconds the rig nudges forward then resets,
+   suggesting a tiny jab without committing to full sprite swap animation.
+   Out of phase between the two so they look like trading blows. */
+.fighter-1 .fighter-rig { animation: spar-r 8s ease-in-out infinite; }
+.fighter-2 .fighter-rig { animation: spar-l 8s ease-in-out infinite 4s; }
+
+@keyframes spar-r {
+  0%, 88%, 100% { transform: translateX(0); }
+  92%           { transform: translateX(2px); }
+  94%           { transform: translateX(0); }
+}
+@keyframes spar-l {
+  0%, 88%, 100% { transform: translate(18px, 0) scale(-1, 1); }
+  92%           { transform: translate(20px, 0) scale(-1, 1); }
+  94%           { transform: translate(18px, 0) scale(-1, 1); }
+}
+
+/* Speech bubble showing fighter name on hover.
+   Positioned above the fighter, with a small tail. */
+.bubble {
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translate(-50%, 4px);
+  background: var(--ink);
+  color: var(--paper);
+  padding: 0.3rem 0.6rem;
+  font-size: 0.78rem;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  border-radius: 3px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 160ms ease, transform 160ms ease;
+  z-index: 2;
+}
+.bubble::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: var(--ink);
+}
+
+.fighter-link:hover .bubble,
+.fighter-link:focus-visible .bubble {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+@media (max-width: 600px) {
+  .fighters { gap: 2.5rem; margin-bottom: 1.5rem; }
+  .fighter  { height: 96px; }
+  /* mobile: speech bubble always visible (no hover) */
+  .bubble { opacity: 1; transform: translate(-50%, 0); }
+}
+
+@media (max-width: 380px) {
+  /* very narrow: hide motif entirely, keep page readable */
+  .fighters { display: none; }
+}
+
+/* ---- masthead ------------------------------------------------------ */
+
+.masthead {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.masthead h1 {
+  font-size: 2.1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.2rem;
+  line-height: 1.15;
+}
+
+.masthead .alias {
+  font-weight: 400;
+  color: var(--ink-soft);
+}
+
+.tagline {
+  font-family: "JetBrains Mono", "IBM Plex Mono", "SF Mono", Menlo, monospace;
+  font-size: 0.95rem;
+  color: var(--ink);
+  margin: 0.6rem 0 0;
+  letter-spacing: -0.01em;
+}
+
+.contact {
+  font-size: 0.92rem;
+  color: var(--ink-soft);
+  margin: 0.6rem 0 0;
+}
+.contact a { color: var(--ink); }
+
+/* ---- section headings (small caps, echoes LaTeX scshape) ---------- */
+
+h2 {
+  font-size: 0.95rem;
+  font-weight: 500;
+  font-variant: small-caps;
+  letter-spacing: 0.08em;
+  color: var(--ink);
+  margin: 2.6rem 0 0.4rem;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 1.3rem 0 0.3rem;
+}
+
+/* ---- content blocks ----------------------------------------------- */
+
+.entry {
+  margin: 0.8rem 0 0.8rem;
+}
+
+.entry > p:first-of-type {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0 1rem;
+  margin: 0.3rem 0 0.15rem;
+}
+
+.entry > p:first-of-type .meta {
+  flex-shrink: 0;
+}
+
+.meta {
+  font-style: italic;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  font-feature-settings: "tnum", "lnum";
+  white-space: nowrap;
+}
+
+ul {
+  padding-left: 1.4rem;
+  margin: 0.4rem 0 0.8rem;
+}
+ul li { margin: 0.18rem 0; }
+
+strong { font-weight: 600; }
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 3rem 0 1.2rem;
+}
+
+.placeholder {
+  color: var(--ink-soft);
+  font-style: italic;
+  border-left: 2px solid var(--rule);
+  padding-left: 1rem;
+  margin: 1rem 0;
+}
+
+/* ---- footer / colophon -------------------------------------------- */
+
+footer {
+  max-width: var(--measure);
+  margin: 0 auto 3rem;
+  padding: 0 1.5rem;
+}
+
+.colophon {
+  font-size: 0.82rem;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+.colophon a {
+  color: var(--ink-soft);
+  border-bottom-color: var(--rule);
+}
+
+/* ---- small screens ------------------------------------------------- */
+
+@media (max-width: 480px) {
+  html { font-size: 17px; }
+  main { margin-top: 1.5rem; }
+  .masthead h1 { font-size: 1.7rem; }
+  h2 { margin-top: 2rem; }
+}
+
+/* ---- print --------------------------------------------------------- */
+
+@media print {
+  :root { --paper: #fff; --ink: #000; --rule: #999; }
+  body { font-size: 11pt; }
+  footer, .fighters { display: none; }
+  a { color: inherit; border: 0; }
+}

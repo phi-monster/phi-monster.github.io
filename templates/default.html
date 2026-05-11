@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>$title$ — $site_title$</title>
+  <meta name="description" content="$description$">
+
+  <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <meta property="og:title"       content="$title$ — $site_title$">
+  <meta property="og:description" content="$description$">
+  <meta property="og:type"        content="website">
+</head>
+<body>
+  <main>
+    $if(has_fighters)$$partial("templates/fighters.html")$$endif$
+    $body$
+  </main>
+
+  <footer>
+    <hr>
+    <p class="colophon">
+      $site_title$ · <a href="/">$site_domain$</a> ·
+      <a href="https://github.com/phi-monster">github.com/phi-monster</a>
+    </p>
+  </footer>
+</body>
+</html>

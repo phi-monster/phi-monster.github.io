@@ -92,45 +92,51 @@ code, kbd, samp, pre {
 .fighter {
   display: block;
   width: auto;
-  height: 130px;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
-  /* gentle idle bob; the two fighters' phases are offset so they breathe
-     out of sync, like two real bodies. */
-  animation: bob 1.4s ease-in-out infinite;
+  /* gentle idle bob; offset phases so the two breathe out of sync. */
+  animation: bob 1.6s ease-in-out infinite;
   transition: transform 180ms ease;
   transform-origin: center bottom;
 }
 
-.fighter-1 { animation-delay: 0s; }
-.fighter-2 { animation-delay: -0.7s; }
+/* Different aspect ratios get different heights so visual weight matches. */
+.fighter-1 { height: 128px; animation-delay: 0s;    }  /* bird ~1:1   */
+.fighter-2 { height: 110px; animation-delay: -0.8s; }  /* shark ~5:3  */
 
 @keyframes bob {
   0%, 100% { transform: translateY(0); }
   50%      { transform: translateY(-3px); }
 }
 
-/* Hover: a small "ready" lift — gloves come up a touch. */
 .fighter-link:hover .fighter {
   animation-play-state: paused;
   transform: translateY(-6px) scale(1.06);
 }
 
-/* Periodic "spar" — every ~8 seconds the rig nudges forward then resets,
-   suggesting a tiny jab without committing to full sprite swap animation.
-   Out of phase between the two so they look like trading blows. */
-.fighter-1 .fighter-rig { animation: spar-r 8s ease-in-out infinite; }
-.fighter-2 .fighter-rig { animation: spar-l 8s ease-in-out infinite 4s; }
-
-@keyframes spar-r {
-  0%, 88%, 100% { transform: translateX(0); }
-  92%           { transform: translateX(2px); }
-  94%           { transform: translateX(0); }
+/* Bird wing flutter — wing group rotates around its shoulder.
+   Mostly idle, briefly flaps every ~6s.                       */
+.bird-wing {
+  transform-origin: 16px 16px;
+  animation: wing-flap 6s ease-in-out infinite;
 }
-@keyframes spar-l {
-  0%, 88%, 100% { transform: translate(18px, 0) scale(-1, 1); }
-  92%           { transform: translate(20px, 0) scale(-1, 1); }
-  94%           { transform: translate(18px, 0) scale(-1, 1); }
+@keyframes wing-flap {
+  0%, 78%, 100% { transform: rotate(0deg); }
+  82%           { transform: rotate(-6deg) translateY(-1px); }
+  86%           { transform: rotate(2deg); }
+  90%           { transform: rotate(-3deg); }
+}
+
+/* Shark jaw — lower jaw + lower teeth swing open every ~7s.
+   Pivots from the back of the jaw line so it gapes naturally. */
+.shark-jaw {
+  transform-origin: 9px 14px;
+  animation: jaw-open 7s ease-in-out infinite 3s;
+}
+@keyframes jaw-open {
+  0%, 84%, 100% { transform: rotate(0deg)  translate(0, 0); }
+  88%           { transform: rotate(15deg) translate(-1px, 2px); }
+  92%           { transform: rotate(8deg)  translate(0, 1px); }
 }
 
 /* Speech bubble showing fighter name on hover.
@@ -188,6 +194,15 @@ code, kbd, samp, pre {
   margin-bottom: 2.5rem;
   padding-bottom: 1.5rem;
   border-bottom: 1px solid var(--rule);
+}
+
+/* Brand mark: Φ-as-sword-in-stone, sits above the masthead title. */
+.brand-mark {
+  display: block;
+  width: auto;
+  height: 72px;
+  margin: 0 auto 0.8rem;
+  color: var(--ink);
 }
 
 .masthead h1 {

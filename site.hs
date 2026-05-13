@@ -31,17 +31,10 @@ main = hakyll $ do
 
     match "templates/*" $ compile templateBodyCompiler
 
-    -- Home page.
+    -- Home page. People bios live on their own personal subdomains
+    -- (lyrica.φ.monster, miranda.φ.monster); the fighters link out directly.
     match "content/index.md" $ do
         route   $ constRoute "index.html"
-        compile $ pandocCompiler
-            >>= loadAndApplyTemplate "templates/default.html" siteCtx
-            >>= relativizeUrls
-
-    -- People pages: content/people/<handle>.md → /people/<handle>.html
-    match "content/people/*.md" $ do
-        route   $ gsubRoute "content/" (const "")
-                  `composeRoutes` setExtension "html"
         compile $ pandocCompiler
             >>= loadAndApplyTemplate "templates/default.html" siteCtx
             >>= relativizeUrls

@@ -129,7 +129,7 @@ We are not a robotics fighting league. The fighting we care about is what happen
 
 The symbol is Φ. We pronounce it "fight."
 
-The standard pronunciation of Φ is "fee" or "fai." Ours is deliberate. Φ studies what happens when physical AI systems are made to fight each other — the symbol is the brand, the pronunciation is the mission. We want both to be public.
+Φ studies what happens when physical AI systems are made to fight each other — the symbol is the brand, the pronunciation is the mission. We want both to be public.
 
 When the work is good enough, the rest will explain itself.
 

@@ -6,6 +6,8 @@ has_fighters: true
 
 <header class="masthead">
 
+<img src="/static/logo.svg" alt="Φ" class="brand-mark"/>
+
 # Φ(fight) <span class="alias">Research</span>
 
 <p class="tagline">physical AI fight the monster.</p>
@@ -38,13 +40,13 @@ and that we think is currently neglected.
 
 <div class="entry">
 
-[**Liu Yuchen**](/people/yuchen.html) <span class="meta">founder · HKUST</span>
+[**Liu Yuchen**](https://lyrica.φ.monster/) <span class="meta">founder · HKUST</span>
 
 </div>
 
 <div class="entry">
 
-[**Han Muchen**](/people/muchen.html) <span class="meta">co-founder · HKUST</span>
+[**Han Muchen**](https://miranda.φ.monster/) <span class="meta">co-founder · HKUST</span>
 
 </div>
 
@@ -58,7 +60,6 @@ double-blind review integrity.
 
 The symbol is **Φ**. We pronounce it *"fight."*
 
-The standard pronunciation of Φ is *fee* or *fai*. Ours is deliberate.
 Φ studies what happens when physical AI systems are made to fight each
 other — the symbol is the brand, the pronunciation is the mission. We
 want both to be public.

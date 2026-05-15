@@ -89,54 +89,57 @@ code, kbd, samp, pre {
   padding: 0.4rem;
 }
 
+/* The sprites are PNG (no internal structure to animate), so all motion
+   lives on the whole image: three independent loops — bob, breath, sway —
+   layered via separate child wrappers would be ideal, but a single
+   transform suffices if we just superimpose them in one keyframe.       */
 .fighter {
   display: block;
   width: auto;
   image-rendering: pixelated;
   image-rendering: crisp-edges;
-  /* gentle idle bob; offset phases so the two breathe out of sync. */
-  animation: bob 1.6s ease-in-out infinite;
-  transition: transform 180ms ease;
+  /* idle = bob + breath + sway, all rolled into one keyframe so phases
+     stay clean. Multiple animations on `transform` would clobber each
+     other; combining into one keyframe avoids the conflict.            */
+  animation: idle 4.4s ease-in-out infinite;
+  transition: transform 220ms cubic-bezier(.34, 1.5, .64, 1);
   transform-origin: center bottom;
+  will-change: transform;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
-/* Different aspect ratios get different heights so visual weight matches. */
-.fighter-1 { height: 128px; animation-delay: 0s;    }  /* bird ~1:1   */
-.fighter-2 { height: 110px; animation-delay: -0.8s; }  /* shark ~5:3  */
+/* Two fighters share the keyframe but offset phases so they breathe out
+   of sync — gives the pair a "two distinct beings" feel.               */
+.fighter-1 { height: 132px; animation-delay: 0s;     }  /* bluebird  */
+.fighter-2 { height: 132px; animation-delay: -2.2s;  }  /* shark     */
 
-@keyframes bob {
-  0%, 100% { transform: translateY(0); }
-  50%      { transform: translateY(-3px); }
+@keyframes idle {
+  0%   { transform: translateY(0)    scale(1.000) rotate( 0.0deg); }
+  25%  { transform: translateY(-2px) scale(1.012) rotate( 1.2deg); }
+  50%  { transform: translateY(-4px) scale(1.022) rotate( 0.0deg); }
+  75%  { transform: translateY(-2px) scale(1.012) rotate(-1.2deg); }
+  100% { transform: translateY(0)    scale(1.000) rotate( 0.0deg); }
 }
 
-.fighter-link:hover .fighter {
+/* Hover: pause idle, lift + scale up. Cubic-bezier overshoot in the
+   transition gives a tiny bounce on the way in (and out).            */
+.fighter-link:hover .fighter,
+.fighter-link:focus-visible .fighter {
   animation-play-state: paused;
-  transform: translateY(-6px) scale(1.06);
+  transform: translateY(-10px) scale(1.10) rotate(0deg);
 }
 
-/* Bird wing flutter — wing group rotates around its shoulder.
-   Mostly idle, briefly flaps every ~6s.                       */
-.bird-wing {
-  transform-origin: 16px 16px;
-  animation: wing-flap 6s ease-in-out infinite;
-}
-@keyframes wing-flap {
-  0%, 78%, 100% { transform: rotate(0deg); }
-  82%           { transform: rotate(-6deg) translateY(-1px); }
-  86%           { transform: rotate(2deg); }
-  90%           { transform: rotate(-3deg); }
+/* Click: brief squash so selecting a fighter feels like a fighting-game
+   character pick. The :active state runs while mouse is held.          */
+.fighter-link:active .fighter {
+  transform: translateY(-4px) scale(0.96) rotate(0deg);
+  transition-duration: 80ms;
 }
 
-/* Shark jaw — lower jaw + lower teeth swing open every ~7s.
-   Pivots from the back of the jaw line so it gapes naturally. */
-.shark-jaw {
-  transform-origin: 9px 14px;
-  animation: jaw-open 7s ease-in-out infinite 3s;
-}
-@keyframes jaw-open {
-  0%, 84%, 100% { transform: rotate(0deg)  translate(0, 0); }
-  88%           { transform: rotate(15deg) translate(-1px, 2px); }
-  92%           { transform: rotate(8deg)  translate(0, 1px); }
+/* Respect reduced motion — kill the loop, keep the hover/click.       */
+@media (prefers-reduced-motion: reduce) {
+  .fighter { animation: none; }
 }
 
 /* Speech bubble showing fighter name on hover.

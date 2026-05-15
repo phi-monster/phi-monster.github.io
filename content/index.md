@@ -6,7 +6,7 @@ has_fighters: true
 
 <header class="masthead">
 
-<img src="/static/logo.svg" alt="Φ" class="brand-mark"/>
+<img src="/static/logo.png" alt="Φ" class="brand-mark"/>
 
 # Φ(fight) <span class="alias">Research</span>
 

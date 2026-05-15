@@ -200,9 +200,11 @@ code, kbd, samp, pre {
 .brand-mark {
   display: block;
   width: auto;
-  height: 72px;
-  margin: 0 auto 0.8rem;
-  color: var(--ink);
+  height: 56px;
+  margin: 0 auto 1rem;
+  opacity: 0.9;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
 }
 
 .masthead h1 {

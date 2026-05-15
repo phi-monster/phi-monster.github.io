@@ -1,7 +1,6 @@
 ---
 title: Home
 description: Φ(fight) Research — physical-world AI fighting. Independent research collective. Open publication. Founded 2026 at HKUST.
-has_fighters: true
 ---
 
 <header class="masthead">
@@ -38,16 +37,24 @@ and that we think is currently neglected.
 
 ## People
 
-<div class="entry">
-
-[**Liu Yuchen**](https://lyrica.φ.monster/) <span class="meta">founder · HKUST</span>
-
+<div class="entry person">
+  <a href="https://lyrica.φ.monster/" class="person-sprite" aria-label="Liu Yuchen personal site">
+    <img src="/static/bluebird.png" alt="" class="sprite sprite-bird">
+  </a>
+  <p class="person-text">
+    <a href="https://lyrica.φ.monster/"><strong>Liu Yuchen</strong></a>
+    <span class="meta">Founder · HKUST</span>
+  </p>
 </div>
 
-<div class="entry">
-
-[**Han Muchen**](https://miranda.φ.monster/) <span class="meta">co-founder · HKUST</span>
-
+<div class="entry person">
+  <a href="https://miranda.φ.monster/" class="person-sprite" aria-label="Han Muchen personal site">
+    <img src="/static/shark.png" alt="" class="sprite sprite-shark">
+  </a>
+  <p class="person-text">
+    <a href="https://miranda.φ.monster/"><strong>Han Muchen</strong></a>
+    <span class="meta">Founding Researcher · HKUST</span>
+  </p>
 </div>
 
 ## Work in progress

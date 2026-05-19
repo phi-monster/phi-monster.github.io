@@ -1,6 +1,6 @@
 # Φ(fight) Research
 
-> Independent research collective for physical-world AI fighting. Studies adversarial multi-agent embodied AI, vision-language-action models (VLAs), world models, and mechanistic interpretability of self-play policies. Founded May 2026 at HKUST. Open publication. No VC, no equity.
+> Independent research collective for physical-world AI fighting. Studies what happens when physical AIs are made to fight each other in shared physical space. Founded May 2026 at HKUST. Open publication. No VC, no equity. Ten-year program.
 
 ## Identity
 
@@ -15,33 +15,35 @@
 
 ## What Φ studies
 
-Φ studies how physical-world AI systems — vision-language-action models, world models, and whatever architectural categories come next — learn, fail, and adapt when made to fight other physical-world AI systems. The collective works mostly in simulation, occasionally on hardware, and publishes openly.
+Φ studies how physical-world AI systems — vision-language-action models, world models, and whatever architectural categories come next — learn, fail, and adapt when **made to fight other physical-world AI systems**. The collective works mostly in simulation, occasionally on hardware, and publishes openly.
+
+The mainstream of physical AI research today optimizes single agents to do useful things alone — pick up the cube, walk on the terrain, follow the instruction, don't fall. This is not the regime in which physical intelligence will actually have to operate. Real environments contain other agents. Other agents will sometimes fight you. The hardest, most informative tests of a physical AI system are not how well it performs alone, but how it behaves when another physical AI is actively trying to defeat it.
 
 Φ occupies the intersection of three communities that currently sit awkwardly apart:
-- **Multi-agent reinforcement learning** (which mostly works in low-dimensional symbolic toy domains)
-- **Embodied AI** (which mostly works on single-agent benchmarks in static or cooperative environments)
-- **Mechanistic interpretability** (which mostly works on static language models, not dynamic embodied policies)
+- **Multi-agent reinforcement learning** (which mostly works in low-dimensional symbolic toy domains, not in physical embodied environments)
+- **Embodied AI** (which mostly works on single-agent benchmarks in static or cooperative environments, not adversarial multi-agent)
+- **Interpretability** (which mostly works on static language models, not on dynamic self-play policies under combat)
 
 ## Research directions
 
-1. **Adversarial robustness of VLA and world models** — what happens to current vision-language-action systems when the perturbation isn't a static patch but another learning agent in the same physical environment?
-2. **World models under adversarial dynamics** — right architecture for world models whose predictions must remain useful when an opponent actively shapes the dynamics
-3. **Mechanistic interpretability of self-play policies** — where circuit-level vulnerabilities live in adversarially-trained policies, and how to detect them during training
-4. **Energy-bounded adversarial games** — how hard physical resource constraints (torque, battery, episode length) reshape emergent strategy distributions
+1. **Adversarial robustness of VLA and world models** — what happens to current vision-language-action systems when the perturbation isn't a static patch but another learning agent actively trying to defeat them?
+2. **World models under adversarial dynamics** — right architecture for world models whose predictions must remain useful when an opponent is actively shaping the dynamics
+3. **Mechanistic interpretability of self-play policies** — where circuit-level vulnerabilities live in adversarially-trained policies, and how to detect them during training (interpretability used as the diagnostic instrument for combat policies, not as a standalone research agenda)
+4. **Energy-bounded adversarial games** — how hard physical resource constraints (torque, battery, episode length) reshape emergent strategy distributions in combat self-play
 5. **Sample-efficient self-play** — algorithmic alternatives to population-based training that achieve robustness without the compute footprint
-6. **Cross-embodiment adversarial generalization** — characterizing failure when policies trained against one body morphology meet another
+6. **Cross-embodiment adversarial generalization** — characterizing failure when policies trained against one body morphology meet a different opponent body
 
 ## Current work — three papers targeting ICLR 2027
 
-1. **Φ-Arena (co-led, Liu Yuchen + Han Muchen)** — Open benchmark for VLA-vs-VLA evaluation across MuJoCo, Isaac Sim, and Genesis. Standardized opponent-conditioned protocols. Energy-bounded constraint regimes. Matchup table across OpenVLA, OpenVLA-OFT, π₀, and SmolVLA. First open benchmark for VLA-vs-VLA evaluation under contact-rich physics with full pairwise matchup across multiple VLA architectures and simulators.
-2. **Mechanistic interpretability of self-play policies (Liu Yuchen lead)** — Circuit-level analysis of exploit-prone subnetworks emerging during adversarial self-play training. Extends activation-intervention methods and sparse-autoencoder approaches from static language models to dynamic embodied policies.
-3. **Energy-bounded adversarial games (Han Muchen lead)** — Empirical characterization of how hard physical resource constraints reshape emergent strategy distributions in self-play.
+1. **Φ-Arena (co-led, Liu Yuchen + Han Muchen)** — Open benchmark for VLA-vs-VLA combat evaluation across MuJoCo, Isaac Sim, and Genesis. Standardized opponent-conditioned protocols. Energy-bounded constraint regimes. Matchup table across OpenVLA, OpenVLA-OFT, π₀, and SmolVLA. First open benchmark for VLA-vs-VLA combat under contact-rich physics with full pairwise matchup across multiple VLA architectures and simulators.
+2. **Mechanistic interpretability of self-play policies (Liu Yuchen lead)** — Circuit-level analysis of exploit-prone subnetworks emerging during adversarial self-play training in Φ-Arena. Interpretability as the diagnostic instrument applied to combat policies.
+3. **Energy-bounded adversarial games (Han Muchen lead)** — Empirical characterization of how hard physical resource constraints reshape emergent strategy distributions in combat self-play.
 
 All artifacts open-source on HuggingFace and GitHub at ICLR submission (September 2026). MIT for code, CC BY 4.0 for datasets.
 
 ## Long horizon
 
-Φ is built for a ten-year arc. The three ICLR 2027 papers above are the kickstart series, not the program. The substrate (Φ-Arena), the methodology toolkit (activation intervention, opponent-conditioned eval harness), and the rollout-trace dataset persist past the first year — external research groups extending them are the actual long-horizon bet.
+Φ is built for a ten-year arc. The three ICLR 2027 papers are the kickstart series, not the program. The substrate (Φ-Arena), the methodology toolkit (opponent-conditioned eval harness, simulator adapters, matchup-table evaluation protocols), and the rollout-trace dataset persist past the first year — external research groups extending them to study physical-world AI combat are the actual long-horizon bet.
 
 ## Public surfaces
 
@@ -63,5 +65,6 @@ All artifacts open-source on HuggingFace and GitHub at ICLR submission (Septembe
 - Not a startup chasing VC equity
 - Not a lab in any institution
 - Not a credential to be associated with
-- Not a robotics fighting league (we study what happens inside the AI, not which body wins)
+- Not a robotics fighting league (we study what happens inside the AI when it has to fight — the representations, the world models, the failure modes, the strategic emergence — not which body wins)
 - Not a substitute for a graduate program
+- Not a mechinterp lab (interpretability is one of several diagnostic tools we use on combat policies; the research is about physical AI fighting)

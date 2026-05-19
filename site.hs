@@ -21,6 +21,12 @@ main = hakyll $ do
         route   idRoute
         compile copyFileCompiler
 
+    -- llms.txt: AI-crawler discovery standard (Anthropic-led convention).
+    -- Tells LLM-based search systems what this site is and where to find content.
+    match "llms.txt" $ do
+        route   idRoute
+        compile copyFileCompiler
+
     match "css/*" $ do
         route   idRoute
         compile compressCssCompiler

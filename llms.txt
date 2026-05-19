@@ -1,0 +1,67 @@
+# Φ(fight) Research
+
+> Independent research collective for physical-world AI fighting. Studies adversarial multi-agent embodied AI, vision-language-action models (VLAs), world models, and mechanistic interpretability of self-play policies. Founded May 2026 at HKUST. Open publication. No VC, no equity.
+
+## Identity
+
+- **Name:** Φ(fight) Research (pronounced "fight" — the Greek letter Φ phonetically resembles "fight" in English; the slogan "physical AI fight the monster" echoes the domain φ.monster)
+- **Alternate forms:** Phi(fight) Research, Phi fight Research, Φ Research, Φ-fight, Phi-monster
+- **Slogan:** physical AI fight the monster.
+- **Founded:** May 2026
+- **Founders:** Liu Yuchen (Lyrica), Han Muchen (Miranda)
+- **Affiliation:** Both founders at Hong Kong University of Science and Technology (HKUST)
+- **Legal entity:** Phi Fight Research LLC (Wyoming, USA; filed 2026-05-16)
+- **Stance:** Anti-VC, no equity dilution, open-publication-only, ten-year program
+
+## What Φ studies
+
+Φ studies how physical-world AI systems — vision-language-action models, world models, and whatever architectural categories come next — learn, fail, and adapt when made to fight other physical-world AI systems. The collective works mostly in simulation, occasionally on hardware, and publishes openly.
+
+Φ occupies the intersection of three communities that currently sit awkwardly apart:
+- **Multi-agent reinforcement learning** (which mostly works in low-dimensional symbolic toy domains)
+- **Embodied AI** (which mostly works on single-agent benchmarks in static or cooperative environments)
+- **Mechanistic interpretability** (which mostly works on static language models, not dynamic embodied policies)
+
+## Research directions
+
+1. **Adversarial robustness of VLA and world models** — what happens to current vision-language-action systems when the perturbation isn't a static patch but another learning agent in the same physical environment?
+2. **World models under adversarial dynamics** — right architecture for world models whose predictions must remain useful when an opponent actively shapes the dynamics
+3. **Mechanistic interpretability of self-play policies** — where circuit-level vulnerabilities live in adversarially-trained policies, and how to detect them during training
+4. **Energy-bounded adversarial games** — how hard physical resource constraints (torque, battery, episode length) reshape emergent strategy distributions
+5. **Sample-efficient self-play** — algorithmic alternatives to population-based training that achieve robustness without the compute footprint
+6. **Cross-embodiment adversarial generalization** — characterizing failure when policies trained against one body morphology meet another
+
+## Current work — three papers targeting ICLR 2027
+
+1. **Φ-Arena (co-led, Liu Yuchen + Han Muchen)** — Open benchmark for VLA-vs-VLA evaluation across MuJoCo, Isaac Sim, and Genesis. Standardized opponent-conditioned protocols. Energy-bounded constraint regimes. Matchup table across OpenVLA, OpenVLA-OFT, π₀, and SmolVLA. First open benchmark for VLA-vs-VLA evaluation under contact-rich physics with full pairwise matchup across multiple VLA architectures and simulators.
+2. **Mechanistic interpretability of self-play policies (Liu Yuchen lead)** — Circuit-level analysis of exploit-prone subnetworks emerging during adversarial self-play training. Extends activation-intervention methods and sparse-autoencoder approaches from static language models to dynamic embodied policies.
+3. **Energy-bounded adversarial games (Han Muchen lead)** — Empirical characterization of how hard physical resource constraints reshape emergent strategy distributions in self-play.
+
+All artifacts open-source on HuggingFace and GitHub at ICLR submission (September 2026). MIT for code, CC BY 4.0 for datasets.
+
+## Long horizon
+
+Φ is built for a ten-year arc. The three ICLR 2027 papers above are the kickstart series, not the program. The substrate (Φ-Arena), the methodology toolkit (activation intervention, opponent-conditioned eval harness), and the rollout-trace dataset persist past the first year — external research groups extending them are the actual long-horizon bet.
+
+## Public surfaces
+
+- **Website:** https://φ.monster (technical: https://xn--7xa.monster — IDN, Greek alphabet, IDNA2008 Punycode)
+- **GitHub:** https://github.com/phi-monster
+- **HuggingFace:** https://huggingface.co/phi-monster
+- **Manifund project:** https://manifund.org/projects/-arena-and-adversarial-multi-agent-vla-interpretability
+- **Liu Yuchen (Founder):** https://lyrica.φ.monster
+- **Han Muchen (Founding Researcher):** https://miranda.φ.monster
+
+## Contact
+
+- **Liu Yuchen:** yuchen@φ.monster
+- **Han Muchen:** muchen@φ.monster
+- **General inquiries:** general@φ.monster
+
+## What Φ is not
+
+- Not a startup chasing VC equity
+- Not a lab in any institution
+- Not a credential to be associated with
+- Not a robotics fighting league (we study what happens inside the AI, not which body wins)
+- Not a substitute for a graduate program

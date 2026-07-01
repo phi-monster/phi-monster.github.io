@@ -15,25 +15,33 @@ description: Φ(fight) Research — physical-world AI fighting. Independent rese
 
 ## What we do
 
-Φ studies how physical-world AI systems — vision-language-action models,
-world models, and whatever architectural categories come next — learn,
-fail, and adapt when made to fight other physical-world AI systems. We
-work mostly in simulation, occasionally on hardware, and publish openly.
+Φ is an independent research collective for physical-world AI combat
+and adversarial testing.
 
-We are not a startup, not a lab, not a credential. We are a small group
-of independent researchers working on a class of problems that sits
-between multi-agent RL, embodied AI, and mechanistic interpretability,
-and that we think is currently neglected.
+We build both — **the sword** and **the shield**. The sword: attackers
+that break frontier physical AI at its weakest points. The shield: what
+those attacks reveal, distilled into stronger physical AI. Two halves
+of the same collective.
 
-## Research directions
+## What we build
 
-- Adversarial robustness of VLA and world models
-- World models under adversarial dynamics
-- Mechanistic interpretability of self-play policies
-- Energy-bounded adversarial games
-- Sample-efficient self-play
-- Cross-embodiment adversarial generalization
-- …
+- A cheat-proof embodied-adversarial standard for physical AI, driven
+  by a learned world-model attacker that stress-tests frontier VLAs
+  and world models.
+- A community release of the attacker — a version-frozen,
+  fine-tunable base that red-teamers, safety teams, and defenders
+  build on.
+- A mechanistic account of where physical AI breaks: state
+  sensitivity and observability collide at contact — a millimeter
+  changes everything, and the robot can't see.
+- A force-native computational primitive for contact dynamics, plus
+  adversarial fidelity certification of learned contact simulators.
+- How physical resource constraints (torque, battery) reshape
+  emergent strategy — tight budgets produce richer, more deceptive
+  attacks than unbounded settings.
+- A combat-robot simulation platform for autonomous physical-world
+  AI fighting; humanoid combat leagues as the first instance, a
+  long-term substrate for serious combat AI beyond.
 
 ## People
 
@@ -59,16 +67,23 @@ and that we think is currently neglected.
 
 ## Work in progress
 
-Three papers targeting **ICLR 2027**. Titles, methods, and supplementary
-artifacts withheld until decisions in January 2027 to preserve
-double-blind review integrity.
+We are building the two founding artifacts of the fight / adversarial
+category in physical AI:
+
+- **the benchmark** — the cheat-proof standard the frontier zoo runs
+  against;
+- **the attacker** — a learned world-model adversary that produces
+  the failures the standard scores.
+
+Both ship open: code, weights, leaderboard, community-fine-tunable
+base.
 
 ## On the name
 
-The symbol is **Φ**. We pronounce it *"fight."*
+The symbol is **Φ**. We pronounce it *fight*.
 
-Φ studies what happens when physical AI systems are made to fight each
-other — the symbol is the brand, the pronunciation is the mission. We
-want both to be public.
+The logo is a sword piercing a shield — the two halves of what we
+build. Φ attacks the frontier (the sword) and, from what the attack
+reveals, builds the defense (the shield). Both are the same collective.
 
-When the work is good enough, the rest will explain itself.
+*Physical AI, fight the monster. We are the monster.*

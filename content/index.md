@@ -78,6 +78,10 @@ category in physical AI:
 Both ship open: code, weights, leaderboard, community-fine-tunable
 base.
 
+## Open to
+
+Investment, grants, and collaboration. Reach out — <general@φ.monster>.
+
 ## On the name
 
 The symbol is **Φ**. We pronounce it *fight*.

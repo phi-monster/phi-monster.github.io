@@ -1,6 +1,6 @@
 ---
 title: Home
-description: Φ(fight) Research — physical-world AI fighting. Independent research collective. Open publication. Founded 2026 at HKUST.
+description: Φ(fight) Research builds the body layer for physical AI — plug in any vision-language model and drive any robot, from everyday work to combat.
 ---
 
 <header class="masthead">
@@ -13,35 +13,15 @@ description: Φ(fight) Research — physical-world AI fighting. Independent rese
 
 </header>
 
-## What we do
-
-Φ is an independent research collective for physical-world AI combat
-and adversarial testing.
-
-We build both — **the sword** and **the shield**. The sword: attackers
-that break frontier physical AI at its weakest points. The shield: what
-those attacks reveal, distilled into stronger physical AI. Two halves
-of the same collective.
-
 ## What we build
 
-- A cheat-proof embodied-adversarial standard for physical AI, driven
-  by a learned world-model attacker that stress-tests frontier VLAs
-  and world models.
-- A community release of the attacker — a version-frozen,
-  fine-tunable base that red-teamers, safety teams, and defenders
-  build on.
-- A mechanistic account of where physical AI breaks: state
-  sensitivity and observability collide at contact — a millimeter
-  changes everything, and the robot can't see.
-- A force-native computational primitive for contact dynamics, plus
-  adversarial fidelity certification of learned contact simulators.
-- How physical resource constraints (torque, battery) reshape
-  emergent strategy — tight budgets produce richer, more deceptive
-  attacks than unbounded settings.
-- A combat-robot simulation platform for autonomous physical-world
-  AI fighting; humanoid combat leagues as the first instance, a
-  long-term substrate for serious combat AI beyond.
+The body layer for physical AI.
+
+Plug in any vision-language model and it drives the robot — arm,
+humanoid, quadruped, drone. No robot training data, no calibration:
+the body measures itself.
+
+Built for everyday work, and for combat.
 
 ## People
 
@@ -51,7 +31,7 @@ of the same collective.
   </a>
   <p class="person-text">
     <a href="https://lyrica.φ.monster/"><strong>Liu Yuchen</strong></a>
-    <span class="meta">Founder · HKUST</span>
+    <span class="meta">Founder, CEO &amp; Lead Researcher</span>
   </p>
 </div>
 
@@ -61,33 +41,14 @@ of the same collective.
   </a>
   <p class="person-text">
     <a href="https://miranda.φ.monster/"><strong>Han Muchen</strong></a>
-    <span class="meta">Founding Researcher · HKUST</span>
+    <span class="meta">Co-founder &amp; Founding Researcher</span>
   </p>
 </div>
-
-## Work in progress
-
-We are building the two founding artifacts of the fight / adversarial
-category in physical AI:
-
-- **the benchmark** — the cheat-proof standard the frontier zoo runs
-  against;
-- **the attacker** — a learned world-model adversary that produces
-  the failures the standard scores.
-
-Both ship open: code, weights, leaderboard, community-fine-tunable
-base.
-
-## Open to
-
-Investment, grants, and collaboration. Reach out — <general@φ.monster>.
 
 ## On the name
 
 The symbol is **Φ**. We pronounce it *fight*.
 
-The logo is a sword piercing a shield — the two halves of what we
-build. Φ attacks the frontier (the sword) and, from what the attack
-reveals, builds the defense (the shield). Both are the same collective.
+The logo is a sword and a shield.
 
-*Physical AI, fight the monster. We are the monster.*
+*Physical AI, fight the monster.*
